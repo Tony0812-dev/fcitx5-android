@@ -1,5 +1,5 @@
 plugins {
-    id("android-lib-convention")
+    id("org.fcitx.fcitx5.android.lib-convention")
     `maven-publish`
     id("com.palantir.git-version") version "3.0.0"
 }
@@ -23,9 +23,8 @@ dependencies {
     implementation(libs.aboutlibraries.core)
 }
 
-val versionDetails: groovy.lang.Closure<com.palantir.gradle.gitversion.VersionDetails> by extra
-val details = versionDetails()
-version = details.gitHash
+val gitVersion: groovy.lang.Closure<String> by extra
+version = gitVersion()
 
 publishing {
     repositories {

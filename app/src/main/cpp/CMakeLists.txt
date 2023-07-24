@@ -37,7 +37,7 @@ find_package(Libevent)
 
 # prebuilt boost
 set(BOOST_VERSION "1.80.0")
-set(BOOST_MODULES headers filesystem atomic iostreams regex)
+set(BOOST_MODULES headers filesystem atomic iostreams)
 set(BOOST_ROOT "${PREBUILT_DIR}/boost/${ANDROID_ABI}")
 set(Boost_DIR "${BOOST_ROOT}/lib/cmake/Boost-${BOOST_VERSION}")
 foreach(mod IN LISTS BOOST_MODULES)
@@ -51,7 +51,8 @@ add_subdirectory(libime)
 target_compile_options(kenlm PRIVATE "-ffile-prefix-map=${CMAKE_CURRENT_SOURCE_DIR}/libime/src/libime/core/kenlm=.")
 
 # prebuilt lua
-include("${PREBUILT_DIR}/lua/${ANDROID_ABI}/lib/cmake/LuaConfig.cmake")
+set(Lua_DIR "${PREBUILT_DIR}/lua/${ANDROID_ABI}/share/cmake/Lua")
+find_package(Lua CONFIG)
 
 # we are using static linking
 option(USE_DLOPEN "" OFF)
